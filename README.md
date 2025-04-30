@@ -1,31 +1,60 @@
-ScanDetect.py
+# DetectScanPlus
 
-A lightweight TCP port scan detection system based on Python, ideal for attacker boxes, honeypots, or CTF red-team nodes.
-Features
+A lightweight TCP port scan detection system based on Python. Ideal for attacker boxes, honeypots, or CTF red-team nodes.
 
-    ✅ Real-time interface-level SYN scan monitoring
-    ✅ Detect source IP and fingerprint scanning tools (e.g. masscan, nmap)
-    ✅ GeoIP lookup and Google Maps pin
-    ✅ Embedded Discord alert notification
-    ✅ Log with auto cleanup (7 days)
-    ✅ Language support: 中文 / English
+---
 
-Install dependencies:
+## ✅ Features
+
+- Real-time interface-level **SYN scan monitoring**
+- Detect source IP and fingerprint scanning tools (e.g. **masscan**, **nmap**)
+- **GeoIP lookup** and **Google Maps pin**
+- Embedded **Discord alert notification**
+- **Log auto cleanup** (retains 7 days)
+- Language support: **中文 / English**
+
+---
+
+## 🔧 Install dependencies
+
+```bash
 sudo apt install tcpdump python3-requests
+```
 
-Replace DISCORD_WEBHOOK in the script with your own Discord Webhook URL.
+---
 
+## 🔑 Setup Discord Webhook
 
-Run script:
-python3 DetectscanPlus.py         # Default: Chinese
-python3 DetectscanPlus.py --lang en   # English mode
+Replace the `DISCORD_WEBHOOK` variable inside `DetectscanPlus.py` with your webhook URL:
 
+```python
+DISCORD_WEBHOOK = "https://discord.com/api/webhooks/your_webhook_here"
+```
 
-Run with systemd on boot:
+---
+
+## 🚀 Run script manually
+
+```bash
+
+python3 DetectscanPlus.py
+
+python3 DetectscanPlus.py --lang en
+```
+
+---
+
+## ⚙️ Run automatically on system boot (systemd)
+
+Create and edit a new systemd service:
+
+```bash
 sudo nano /etc/systemd/system/DetectScanPlus.service
+```
 
+Paste the following content:
 
-Add the following:
+```ini
 [Unit]
 Description=DetectScanPlus Service
 After=network.target
@@ -36,10 +65,20 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
+```
 
+Enable and start the service:
 
-enable it:
+```bash
 sudo systemctl daemon-reexec
 sudo systemctl enable DetectScanPlus.service
 sudo systemctl start DetectScanPlus.service
+```
 
+---
+
+## 🖼️ Sample Alert Output
+
+```bash
+🚨 [Scan Detected] IP: 192.168.1.99 | Tool: nmap | Region: Taiwan | Time: 2025-04-23 17:01:22
+```

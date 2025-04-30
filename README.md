@@ -1,4 +1,4 @@
-# DetectScanPlus
+# DetectScan
 
 A lightweight TCP port scan detection system based on Python. Ideal for attacker boxes, honeypots, or CTF red-team nodes.
 

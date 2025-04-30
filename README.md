@@ -10,7 +10,7 @@ Features
     ✅ Log with auto cleanup (7 days)
     ✅ Language support: 中文 / English
 
-##Install dependencies:
+#Install dependencies:
 
 sudo apt install tcpdump python3-requests
 
@@ -18,16 +18,19 @@ sudo apt install tcpdump python3-requests
 Replace DISCORD_WEBHOOK in the script with your own Discord Webhook URL.
 -------------------------------------------------------------------------
 
-##Run script:
+#Run script:
+
 python3 DetectscanPlus.py         # Default: Chinese
 python3 DetectscanPlus.py --lang en   # English mode
 -------------------------------------------------------------------------
 
-##Run with systemd on boot:
+#Run with systemd on boot:
+
 sudo nano /etc/systemd/system/DetectScanPlus.service
 -------------------------------------------------------------------------
 
-##Add the following:
+#Add the following:
+
 [Unit]
 Description=DetectScanPlus Service
 After=network.target
@@ -40,7 +43,8 @@ Restart=on-failure
 WantedBy=multi-user.target
 -------------------------------------------------------------------------
 
-##enable it:
+#enable it:
+
 sudo systemctl daemon-reexec
 sudo systemctl enable DetectScanPlus.service
 sudo systemctl start DetectScanPlus.service

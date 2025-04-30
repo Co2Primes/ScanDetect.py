@@ -1,49 +1,86 @@
-## ScanDetect.py
- 一个基于 Python 的轻量级端口扫描侦测系统，适用于渗透测试主机、蜜罐、CTF 攻击端等场景。
+# DetectScanPlus
 
-## 功能特色
+基于 Python 的轻量级 TCP 端口扫描侦测系统。适用于攻击者机器、蜜罐或 CTF 红队节点。
 
-- ✅ 实时监听网卡 SYN 扫描行为
-- ✅ 自动识别来源 IP、工具指纹（如 masscan、nmap）
-- ✅ 地理位置查询 + Google 地图定位
-- ✅ Discord 嵌入式告警推送
-- ✅ 日志保存与 7 天自动清理
-- ✅ 可选语言：中文 / English
+---
 
-## 使用方式
+## ✅ 功能特点
 
-1. 安装依赖：
+- 实时接口级 **SYN 扫描监控**
+- 侦测来源 IP 与扫描工具特征（如 **masscan**、**nmap**）
+- **GeoIP 地理位置查询** 与 **Google Maps 定位**
+- 集成 **Discord 警报通知**
+- **日志自动清理**（保留 7 天）
+- 支援语言：**中文 / English**
+
+---
+
+## 🔧 安装依赖
+
 ```bash
 sudo apt install tcpdump python3-requests
----------------------------------------------------------
-将 DISCORD_WEBHOOK 改为你自己的 Discord Webhook URL。
----------------------------------------------------------
+```
 
-2.执行脚本：
-python3 DetectscanPlus.py        # 默认中文
-python3 DetectscanPlus.py --lang en   # 英文模式
----------------------------------------------------------
+---
 
-3.开机自启动：
-sudo nano /etc/systemd/system/DetectScanPlus.service
+## 🔑 设置 Discord Webhook
 
-4.创建文件：
-sudo nano /etc/systemd/system/DetectScanPlus.service
+请将 `ScanDetect.py` 中的 `DISCORD_WEBHOOK` 变量替换成你的 Discord webhook URL：
 
-5.加入：
+```python
+DISCORD_WEBHOOK = "https://discord.com/api/webhooks/your_webhook_here"
+```
+
+---
+
+## 🚀 手动运行脚本
+
+```bash
+# 中文模式（默认）
+python3 ScanDetect.py
+
+# 英文模式
+python3 ScanDetect.py --lang en
+```
+
+---
+
+## ⚙️ 开机自动运行（使用 systemd）
+
+创建并编辑新的 systemd 服务文件：
+
+```bash
+sudo nano /etc/systemd/system/ScanDetect.service
+```
+
+粘贴以下内容：
+
+```ini
 [Unit]
-Description=DetectScanPlus Service
+Description=ScanDetect 服务
 After=network.target
 
 [Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/ScanDetect.py
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
--------------------------------------------------------------
+```
 
-6.启用服务：
+启用并启动服务：
+
+```bash
 sudo systemctl daemon-reexec
-sudo systemctl enable DetectScanPlus.service
-sudo systemctl start DetectScanPlus.service
+sudo systemctl enable ScanDetect.service
+sudo systemctl start ScanDetect.service
+```
 
+---
+
+## 🖼️ 示例警报输出
+
+```bash
+🚨 [检测到扫描] IP: 192.168.1.99 | 工具: nmap | 地区: Taiwan | 时间: 2025-04-23 17:01:22
+```
+---

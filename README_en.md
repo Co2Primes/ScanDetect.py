@@ -44,4 +44,3 @@ enable it:
 sudo systemctl daemon-reexec
 sudo systemctl enable DetectScanPlus.service
 sudo systemctl start DetectScanPlus.service
-delete README_en.md

@@ -25,7 +25,7 @@ sudo apt install tcpdump python3-requests
 
 ## 🔑 Setup Discord Webhook
 
-Replace the `DISCORD_WEBHOOK` variable inside `DetectscanPlus.py` with your webhook URL:
+Replace the `DISCORD_WEBHOOK` variable inside `ScanDetect.py` with your webhook URL:
 
 ```python
 DISCORD_WEBHOOK = "https://discord.com/api/webhooks/your_webhook_here"
@@ -37,9 +37,9 @@ DISCORD_WEBHOOK = "https://discord.com/api/webhooks/your_webhook_here"
 
 ```bash
 
-python3 DetectscanPlus.py
+python3 ScanDetect.py
 
-python3 DetectscanPlus.py --lang en
+python3 ScanDetect.py --lang en
 ```
 
 ---
@@ -49,18 +49,18 @@ python3 DetectscanPlus.py --lang en
 Create and edit a new systemd service:
 
 ```bash
-sudo nano /etc/systemd/system/DetectScanPlus.service
+sudo nano /etc/systemd/system/ScanDetect.service
 ```
 
 Paste the following content:
 
 ```ini
 [Unit]
-Description=DetectScanPlus Service
+Description=ScanDetect Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /usr/local/bin/DetectscanPlus.py
+ExecStart=/usr/bin/python3 /usr/local/bin/ScanDetect.py
 Restart=on-failure
 
 [Install]
@@ -71,8 +71,8 @@ Enable and start the service:
 
 ```bash
 sudo systemctl daemon-reexec
-sudo systemctl enable DetectScanPlus.service
-sudo systemctl start DetectScanPlus.service
+sudo systemctl enableScanDetect.service
+sudo systemctl start ScanDetect.service
 ```
 
 ---
